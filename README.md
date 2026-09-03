@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/DiscordTorRouter/Assets/Brand/link.png" width="112" alt="Ícone do Discord Tor Router">
+  <img src="src/DiscordTorRouter/Assets/Brand/link.svg" width="112" alt="Ícone do Discord Tor Router">
 </p>
 
 <h1 align="center">Discord Tor Router</h1>
