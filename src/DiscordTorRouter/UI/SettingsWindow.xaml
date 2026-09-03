@@ -1,0 +1,142 @@
+<Window
+    x:Class="DiscordTorRouter.UI.SettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid x:Name="RootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="AppTitleBar" Padding="20,0,160,0" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Width="30" Height="30" Source="ms-appx:///Assets/link.png" Stretch="Uniform" />
+            <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                <TextBlock Text="Discord Tor Router" FontSize="14" FontWeight="SemiBold" />
+                <TextBlock Text="Roteamento seletivo pela rede Tor" FontSize="11" Opacity="0.64" />
+            </StackPanel>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="900" Padding="28,16,28,32" HorizontalAlignment="Stretch" Spacing="20">
+
+                <Border Style="{StaticResource CardBorderStyle}" Padding="24">
+                    <Grid ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="7">
+                            <TextBlock Text="Proteção do Discord" FontSize="14" Opacity="0.68" />
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <ProgressRing x:Name="RouterProgressRing" Width="22" Height="22" IsActive="True" />
+                                <TextBlock Text="{Binding RouterStatusText}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <TextBlock Text="Somente os destinos configurados são enviados pelo Tor." Opacity="0.68" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <Button x:Name="ToggleButton" Grid.Column="1" MinWidth="132" Padding="18,10" VerticalAlignment="Center" Style="{StaticResource AccentButtonStyle}" Click="ToggleButton_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE72E;" FontSize="16" />
+                                <TextBlock x:Name="ToggleButtonText" Text="Desligar" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <InfoBar x:Name="ErrorInfoBar" IsOpen="False" IsClosable="False" Severity="Error" Title="A proteção encontrou um problema" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                    <Button x:Name="OpenDiscordButton" Padding="14,8" Click="OpenDiscordButton_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon x:Name="OpenDiscordIcon" Glyph="&#xE8A7;" FontSize="15" />
+                            <ProgressRing x:Name="OpenDiscordProgress" Width="16" Height="16" IsActive="False" Visibility="Collapsed" />
+                            <TextBlock x:Name="OpenDiscordText" Text="Abrir Discord" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="NewIdentityButton" Padding="14,8" Click="NewIdentityButton_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon x:Name="NewIdentityIcon" Glyph="&#xE777;" FontSize="15" />
+                            <ProgressRing x:Name="NewIdentityProgress" Width="16" Height="16" IsActive="False" Visibility="Collapsed" />
+                            <TextBlock x:Name="NewIdentityText" Text="Nova identidade Tor" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Visão geral" FontSize="20" FontWeight="SemiBold" />
+                    <Grid ColumnSpacing="12" RowSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Style="{StaticResource CardBorderStyle}">
+                            <StackPanel Spacing="8">
+                                <FontIcon Glyph="&#xE774;" FontSize="22" Foreground="{StaticResource BrandBrush}" HorizontalAlignment="Left" />
+                                <TextBlock Text="Tor" Opacity="0.68" />
+                                <TextBlock Text="{Binding TorStatusText}" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource CardBorderStyle}">
+                            <StackPanel Spacing="8">
+                                <FontIcon Glyph="&#xE968;" FontSize="22" Foreground="{StaticResource BrandSecondaryBrush}" HorizontalAlignment="Left" />
+                                <TextBlock Text="Roteador" Opacity="0.68" />
+                                <TextBlock Text="{Binding RouterStatusText}" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1" Style="{StaticResource CardBorderStyle}">
+                            <StackPanel Spacing="8">
+                                <FontIcon Glyph="&#xE8A7;" FontSize="22" Foreground="{StaticResource BrandBrush}" HorizontalAlignment="Left" />
+                                <TextBlock Text="Discord" Opacity="0.68" />
+                                <TextBlock Text="{Binding DiscordStatus}" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CardBorderStyle}">
+                            <StackPanel Spacing="8">
+                                <FontIcon Glyph="&#xE753;" FontSize="22" Foreground="{StaticResource BrandSecondaryBrush}" HorizontalAlignment="Left" />
+                                <TextBlock Text="Destinos" Opacity="0.68" />
+                                <TextBlock Text="{Binding DestinationStatus}" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Comportamento" FontSize="20" FontWeight="SemiBold" />
+                    <Border Style="{StaticResource CardBorderStyle}" Padding="20,8">
+                        <StackPanel>
+                            <ToggleSwitch x:Name="OpenDiscordSwitch" Header="Abrir o Discord quando a proteção estiver pronta" OnContent="Ativado" OffContent="Desativado" Toggled="SettingChanged" />
+                            <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,4" />
+                            <ToggleSwitch x:Name="RestartDiscordSwitch" Header="Reabrir o Discord se ele já estiver aberto quando o roteador ficar pronto" OnContent="Ativado" OffContent="Desativado" Toggled="SettingChanged" />
+                            <TextBlock Margin="0,-6,0,10" Text="O Discord permanece fechado até o Tor e o roteador ficarem prontos." Opacity="0.62" TextWrapping="Wrap" />
+                            <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,4" />
+                            <ToggleSwitch x:Name="StartMinimizedSwitch" Header="Iniciar minimizado na bandeja" OnContent="Ativado" OffContent="Desativado" Toggled="SettingChanged" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Endereços protegidos" FontSize="20" FontWeight="SemiBold" />
+                    <TextBlock Text="Adicione um destino por linha no formato host:porta. Apenas conexões do Discord.exe correspondentes serão roteadas." Opacity="0.68" TextWrapping="Wrap" />
+                    <TextBox x:Name="DestinationsTextBox" Height="132" AcceptsReturn="True" FontFamily="Cascadia Mono, Consolas" PlaceholderText="gateway.discord.gg:443" TextChanged="DestinationsTextBox_TextChanged" />
+                    <TextBlock x:Name="ValidationText" Opacity="0.78" TextWrapping="Wrap" />
+                </StackPanel>
+
+                <InfoBar IsOpen="True" IsClosable="False" Severity="Informational" Title="Proteção contra vazamentos" Message="Se o Tor ou a ponte SOCKS5 falhar, conexões correspondentes são bloqueadas em vez de usar a internet direta." />
+
+                <Grid Margin="0,4,0,0">
+                    <TextBlock Text="As alterações são salvas automaticamente." VerticalAlignment="Center" Opacity="0.58" />
+                    <Button Content="Fechar" HorizontalAlignment="Right" Padding="20,8" Click="CloseButton_Click" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

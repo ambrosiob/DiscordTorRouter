@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWinUI>true</UseWinUI>
+    <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+    <WindowsPackageType>None</WindowsPackageType>
+    <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\Brand\link.ico</ApplicationIcon>
+    <AssemblyName>DiscordTorRouter</AssemblyName>
+    <AssemblyTitle>Discord Tor Router</AssemblyTitle>
+    <Version>1.0.0</Version>
+    <Authors>Bruno Ambrosio</Authors>
+    <Copyright>Copyright © 2026 Bruno Ambrosio</Copyright>
+    <Description>Proteja conexões escolhidas do Discord pela rede Tor com uma interface simples e nativa do Windows 11.</Description>
+    <Product>Discord Tor Router</Product>
+    <Title>Discord Tor Router</Title>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ambrosiob/DiscordTorRouter</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ambrosiob/DiscordTorRouter.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RootNamespace>DiscordTorRouter</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+    <!-- A solução .slnx usa Any CPU por padrão. O nome da configuração fica
+         compatível com o Visual Studio, mas o executável continua sendo x64
+         por causa de PlatformTarget e RuntimeIdentifier. -->
+    <Platforms>AnyCPU;x64</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Assets\Brand\*.*" CopyToOutputDirectory="PreserveNewest" TargetPath="Assets\%(Filename)%(Extension)" />
+    <Content Include="Assets\tor\**\*" CopyToOutputDirectory="PreserveNewest" TargetPath="tor\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Content Include="Assets\windivert\**\*" CopyToOutputDirectory="PreserveNewest" TargetPath="windivert\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="Assets\torrc" CopyToOutputDirectory="PreserveNewest" TargetPath="tor\torrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="H.NotifyIcon.WinUI" Version="2.4.1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260804001" />
+  </ItemGroup>
+</Project>

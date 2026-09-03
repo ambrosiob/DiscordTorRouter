@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="src/DiscordTorRouter/DiscordTorRouter.csproj">
+    <Platform Solution="*|Any CPU" Project="AnyCPU" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="tests/DiscordTorRouter.Tests/DiscordTorRouter.Tests.csproj">
+    <Platform Solution="*|Any CPU" Project="AnyCPU" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+</Solution>

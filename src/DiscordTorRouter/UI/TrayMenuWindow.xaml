@@ -1,0 +1,49 @@
+<Window
+    x:Class="DiscordTorRouter.UI.TrayMenuWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid x:Name="RootGrid" Background="Transparent">
+        <Border Padding="12" Background="{ThemeResource LayerFillColorDefaultBrush}" BorderThickness="0" CornerRadius="12">
+            <StackPanel Spacing="4">
+                <Grid Margin="6,4,6,10" ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Width="32" Height="32" Source="ms-appx:///Assets/link.png" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="Discord Tor Router" FontWeight="SemiBold" />
+                        <TextBlock x:Name="StatusText" FontSize="12" Opacity="0.64" />
+                    </StackPanel>
+                </Grid>
+                <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,0,0,4" />
+                <Button x:Name="ToggleRoutingButton" Style="{StaticResource TrayMenuButtonStyle}" Click="ToggleRoutingButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE72E;" FontSize="16" /><TextBlock x:Name="ToggleRoutingText" /></StackPanel>
+                </Button>
+                <Button x:Name="OpenDiscordButton" Style="{StaticResource TrayMenuButtonStyle}" Click="OpenDiscordButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12"><FontIcon x:Name="OpenDiscordIcon" Glyph="&#xE8A7;" FontSize="16" /><TextBlock x:Name="OpenDiscordText" Text="Abrir Discord" /></StackPanel>
+                </Button>
+                <Button Style="{StaticResource TrayMenuButtonStyle}" Click="RestartDiscordButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE72C;" FontSize="16" /><TextBlock Text="Reiniciar Discord" /></StackPanel>
+                </Button>
+                <Button x:Name="NewIdentityButton" Style="{StaticResource TrayMenuButtonStyle}" Click="NewIdentityButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <FontIcon x:Name="NewIdentityIcon" Glyph="&#xE777;" FontSize="16" />
+                        <ProgressRing x:Name="NewIdentityProgress" Width="16" Height="16" IsActive="False" Visibility="Collapsed" />
+                        <TextBlock x:Name="NewIdentityText" Text="Nova identidade Tor" />
+                    </StackPanel>
+                </Button>
+                <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,4" />
+                <Button Style="{StaticResource TrayMenuButtonStyle}" Click="OpenPanelButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE713;" FontSize="16" /><TextBlock Text="Abrir painel" /></StackPanel>
+                </Button>
+                <ToggleSwitch x:Name="StartupSwitch" Margin="10,2" Header="Iniciar com o Windows" OnContent="Ativado" OffContent="Desativado" Toggled="StartupSwitch_Toggled" />
+                <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,4" />
+                <Button Style="{StaticResource TrayMenuButtonStyle}" Click="ExitButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE8BB;" FontSize="16" /><TextBlock Text="Sair" /></StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

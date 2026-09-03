@@ -1,0 +1,61 @@
+# .NET e MSBuild
+**/[Bb]in/
+**/[Oo]bj/
+artifacts/
+publish/
+*.binlog
+*.nupkg
+*.snupkg
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio Code e JetBrains
+.vscode/
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# Testes e cobertura
+TestResults/
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+*.trx
+
+# NuGet
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Inno Setup
+installer/output/
+installer/staging/
+*.iss.user
+
+# Logs, despejos e temporários
+*.log
+*.dmp
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Arquivos locais do sistema
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Certificados e segredos locais
+*.pfx
+*.p12
+*.key
+*.secrets.json
