@@ -55,7 +55,9 @@ Name: "{autoprograms}\{#AppName}"; Filename: "{app}\{#AppExeName}"; WorkingDir: 
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#AppExeName}"; Description: "Abrir o {#AppName}"; Flags: nowait postinstall skipifsilent
+; Executa pelo usuário original e usa o verbo "runas" para que o próprio
+; aplicativo exiba a confirmação do UAC, mesmo ao ser aberto no fim do setup.
+Filename: "{app}\{#AppExeName}"; Description: "Abrir o {#AppName}"; WorkingDir: "{app}"; Verb: "runas"; Flags: nowait postinstall skipifsilent runasoriginaluser shellexec
 
 [UninstallRun]
 Filename: "{sys}\schtasks.exe"; Parameters: "/Delete /TN ""DiscordTorRouter"" /F"; Flags: runhidden; RunOnceId: "RemoveStartupTask"
